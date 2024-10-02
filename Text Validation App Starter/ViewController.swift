@@ -55,21 +55,7 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func validatePassword(_ sender: Any) {
-		if doesContainEmailAdress(usernameTextField.text ?? "") {
-			if passwordTextField.text?.count ?? 0 >= 8 {
-				if doesContainSpecialCharacter(passwordTextField.text ?? "") {
-					if doesContainCaseVariation(passwordTextField.text ?? "") {
-						statusMessageLabel.text = "Log in successful"
-					} else {
-						statusMessageLabel.text = "Password must contain one uppercased character and one lowercased character."
-					}
-				} else {
-					statusMessageLabel.text = "Password must contain at least one special character."
-				}
-			} else {
-				statusMessageLabel.text = "Password must be at least 8 characters long."
-			}
-		} else {
+		guard doesContainEmailAdress(usernameTextField.text ?? "") else {
 			statusMessageLabel.text = "Please enter a valid email address."
 			statusMessageLabel.textColor = .red
 			return
