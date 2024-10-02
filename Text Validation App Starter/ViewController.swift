@@ -71,7 +71,25 @@ class ViewController: UIViewController {
 			}
 		} else {
 			statusMessageLabel.text = "Please enter a valid email address."
+			statusMessageLabel.textColor = .red
+			return
 		}
-		
+		guard passwordTextField.text?.count ?? 0 >= 8 else {
+			statusMessageLabel.text = "Password must be at least 8 characters long."
+			statusMessageLabel.textColor = .red
+			return
+		}
+		guard doesContainSpecialCharacter(passwordTextField.text ?? "") else {
+			statusMessageLabel.text = "Password must contain at least one special character."
+			statusMessageLabel.textColor = .red
+			return
+		}
+		guard doesContainCaseVariation(passwordTextField.text ?? "") else {
+			statusMessageLabel.text = "Password must contain one uppercased character and one lowercased character."
+			statusMessageLabel.textColor = .red
+			return
+		}
+		statusMessageLabel.text = "Log in successful"
+		statusMessageLabel.textColor = .green
 	}
 }
